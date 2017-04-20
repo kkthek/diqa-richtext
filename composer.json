@@ -1,0 +1,29 @@
+{
+	"name": "diqa/richtext",
+	"type": "mediawiki-extension",
+	"description": "Richtext form fields for SemanticForms",
+	"keywords": [
+		"DIQA", "Richtext", "SemanticForms", "SMW"
+	],
+	
+	"license": "GPL v2.0",
+	"authors": [
+		{
+			"name": "Kai Kühn"
+			
+		}
+	],
+	"require": {
+		
+	},
+	
+	"autoload": {
+		"psr-4": {
+			"DIQA\\": "src/"
+		},
+		"files" : [
+			"DIQArichtext.php"
+		]
+		
+	}
+}

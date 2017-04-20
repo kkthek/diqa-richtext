@@ -1,0 +1,144 @@
+@media screen and (min-width: 768px) {
+    .modal-dialog-richtext {
+        width: 1200px; /* New width for default modal */
+    	margin: 30px auto;
+		position: relative;
+    }
+    .modal-dialog-wikipages {
+		width: 400px; /* New width for default modal */
+    	margin: 30px auto;
+		position: relative;
+    }
+    .modal-sm {
+        width: 350px; /* New width for small modal */
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .modal-lg {
+        width: 950px; /* New width for large modal */
+    }
+}
+
+.richtext-form-input {
+    cursor: pointer;
+}
+
+.richtext-dialog div.modal-body {
+    height: 400px;
+}
+
+.richtext-dialog div.richtext-preview-image {
+    float: left;
+    height: 256px;
+    width: 256px;
+    margin: 5px;
+    border: 1px solid #000;
+	position: relative;
+	left: -5px;
+	top: -5px;
+	background-position: center;
+}
+
+.richtext-dialog-globalSpinner{
+    position:fixed;
+    z-index:99;/* make higher than whatever is on the page */
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    margin:auto;
+    background:red;
+    width:100px;
+    height:100px;
+}
+
+.richtext-dialog div.richtext-image-list {
+    float: right;
+    width: 76%;
+	height: 100%;
+	overflow: auto;
+	font-size: 12px;
+}
+
+.richtext-dialog input.richtext-search-field {
+    width: 90%;
+    margin-bottom: 10px;
+}
+
+.modal-dialog-wikipages input#wiki-pages-search-field {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.richtext-dialog div.richtext-image-list table tr.odd {
+    /*background-color: #eee;*/
+	 color: #000000;
+     background-color: #f9f9f9;
+}
+
+.richtext-dialog div.richtext-image-list table tr.even {
+    /*background-color: #ccc;*/ 
+     color: #000000;
+     background-color: #f9f9f9;
+}
+
+.richtext-dialog div.richtext-image-list table tr:hover {
+    background-color: #CCC;
+    cursor: pointer;
+}
+
+.richtext-dialog div.richtext-image-list table tr.selected {
+    background-color: #CCC;
+    cursor: pointer;
+}
+
+.richtext-dialog div.richtext-image-list table {
+    width: 100%;
+}
+
+.richtext-dialog div.richtext-image-list table td {
+    padding: 5px;
+    border-width: 1px;
+    border-style: solid;
+    border-color:  #aaaaaa;
+}
+
+.richtext-dialog div.richtext-image-list table th {
+    padding: 5px;
+    color: #337AB7;
+    background-color: #f2f2f2;
+    border-width: 1px;
+    border-style: solid;
+    border-color:  #aaaaaa;
+}
+
+.richtext-dialog input.richtext-image-result {
+	width: 98%;
+	margin: 0px 10px 10px;
+}
+
+.richtext-dialog input.add-to-basket {
+	margin-left: 10px;
+}
+
+#richtext-image-search {
+	height:28px;
+	margin-left: 3px;
+}
+
+.globalSpinner{
+    position:fixed;
+    z-index:1000;/* make higher than whatever is on the page */
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    margin:auto;
+    width:100px;
+    height:100px;
+}
+
+span.fancytree-icon {
+	background: url("category.png") !important;
+}
