@@ -48,7 +48,7 @@ $wgHooks['ParserFirstCallInit'][] = 'wfDIQArichtextSetup';
 
 $wgResourceModules['ext.semanticformsinputs.richtext'] = array(
 		'localBasePath' => $dir,
-		'remoteExtPath' => 'DIQArichtext',
+		'remoteExtPath' => 'Richtext',
 		'scripts' => array(
 				'libs/category-picker-dialog.js',
 				'libs/jquery-ui/jquery-ui-1.9.2.custom.min.js',

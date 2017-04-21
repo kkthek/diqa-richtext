@@ -178,7 +178,7 @@
 				css = {
 					'background-image' : 'url('
 							+ wgScriptPath
-							+ '/extensions/DIQArichtext/skins/ajax-preview-loader.gif)',
+							+ '/extensions/Richtext/skins/ajax-preview-loader.gif)',
 					'background-repeat' : 'no-repeat',
 					'background-position' : 'center'
 				};
@@ -196,7 +196,7 @@
 				css = {
 					'background-image' : 'url('
 							+ wgScriptPath
-							+ '/extensions/DIQArichtext/skins/ajax-preview-loader.gif)',
+							+ '/extensions/Richtext/skins/ajax-preview-loader.gif)',
 					'background-repeat' : 'no-repeat',
 					'background-position' : 'center'
 				};

@@ -123,7 +123,7 @@
 			var wgScriptPath = mw.config.get('wgScriptPath');
 			css = {
 				'background-image' : 'url(' + wgScriptPath
-						+ '/extensions/DIQArichtext/skins/ajax-preview-loader.gif)',
+						+ '/extensions/Richtext/skins/ajax-preview-loader.gif)',
 				'background-repeat' : 'no-repeat',
 				'background-position' : 'center'
 			};

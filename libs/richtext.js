@@ -15,7 +15,7 @@
 function SFI_RICHTEXT_init(inputID, attribs) {
 		
 	// initialize richtext editor
-	var basePath = wgScriptPath + '/extensions/DIQArichtext/libs/tinymce-4.4.0/';
+	var basePath = wgScriptPath + '/extensions/Richtext/libs/tinymce-4.4.0/';
 	var withimage = $('#' + inputID).attr("withimage") == "true";
 	var alignment = $('#' + inputID).attr("alignment");
 	var category = $('#' + inputID).attr("category");
