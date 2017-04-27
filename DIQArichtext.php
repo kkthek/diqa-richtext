@@ -33,7 +33,7 @@ global $wgResourceModules;
 // register extension
 $wgExtensionCredits[ 'diqa' ][] = array(
 	'path' => __FILE__,
-	'name' => 'DIQA Richtext',
+	'name' => 'Richtext',
 	'author' => array( 'DIQA Projektmanagement GmbH' ),
 	'license-name' => 'GPL-2.0+',
 	'url' => 'http://www.diqa-pm.com',
