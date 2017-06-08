@@ -97,19 +97,46 @@ function SFI_RICHTEXT_init(inputID, attribs) {
 						            }
 						        });
 							
+							var onEditLink = function(event) {
+				            	
+				            	var clickHandler = arguments.callee;
+				            	var node = $(editor.selection.getNode());
+				            						            
+				            	var dialog = new DIQARICHTEXT.Dialogs.WikiPagesDialog('richtext-edit-links', node, function(selectedTab, data) {
+				            		
+				            		var cell = $(editor.selection.getNode());
+				            		
+				            		var anchor = null;
+				            		switch(selectedTab) {
+				            		case 0:
+				            			anchor = $('<a href="'+data.fullTitle+'" title="'+data.title+'" class="diqa-richtext">'+data.title+'</a>');
+				            			
+				            			break;
+				            		case 1:
+				            			anchor = $('<a target="_blank" rel="nofollow noreferrer noopener" class="external text diqa-richtext" href="'+data.url+'">'+data.label+'</a>');
+				            		
+				            			break;
+				            		}
+				            		
+				            		var editExisting = cell.hasClass('diqa-richtext');
+				            		if (editExisting) {
+				            			var parent = cell.parent();
+				            			parent.find('a').remove();
+				            			parent.append(anchor);
+				            		} else {
+				            			cell.append(anchor);
+				            		}
+				            		anchor.css({'cursor' : 'pointer'});
+				            		anchor.click(clickHandler);	
+				            		
+				            	});
+				            	dialog.openDialog();
+				            };
+				            
 							editor.addButton('addLink', {
 					            title : 'Add link',
 					            image : basePath + 'skins/lightgray/img/anchor.gif',
-					            onclick : function(event) {
-					            	
-					            	var dialog = new DIQARICHTEXT.Dialogs.WikiPagesDialog('richtext-edit-links', function(label, fullTitle) {
-					            		var cell = $(editor.selection.getNode());
-					    				var span = $('<span>');
-					    				span.html("[["+fullTitle+"|"+label+"]]");
-					    				cell.append(span);
-					            	});
-					            	dialog.openDialog();
-					            }
+					            onclick : onEditLink
 					        });
 							
 							editor.addButton('addCategory', {
@@ -133,6 +160,7 @@ function SFI_RICHTEXT_init(inputID, attribs) {
 								//alert('init occured');
 								$("#wpSaveAndContinue").removeClass('sf-save_and_continue-changed');
 								$("#wpSaveAndContinue").removeAttr("disabled");
+								
 					        });
 							editor.on('keyup', function(args) {
 								//alert('keyup occured');
@@ -143,12 +171,17 @@ function SFI_RICHTEXT_init(inputID, attribs) {
 								//alert('setcontent occured');
 								$("#wpSaveAndContinue").addClass('sf-save_and_continue-changed');
 								$("#wpSaveAndContinue").removeAttr("disabled");
+								$('a.diqa-richtext', this.getBody()).click(onEditLink);
 					        });
 							editor.on('change', function(args) {
 								//alert('change occured');
 								$("#wpSaveAndContinue").addClass('sf-save_and_continue-changed');
 								$("#wpSaveAndContinue").removeAttr("disabled");
 					        });
+							
+							
+							
+				            
 						}
 
 					});

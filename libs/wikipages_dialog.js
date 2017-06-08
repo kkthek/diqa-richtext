@@ -10,11 +10,12 @@
 	window.DIQARICHTEXT = window.DIQARICHTEXT || {};
 	window.DIQARICHTEXT.Dialogs = window.DIQARICHTEXT.Dialogs || {};
 	
-	DIQARICHTEXT.Dialogs.WikiPagesDialog = function(dialogId, callbackOnClose) {
+	DIQARICHTEXT.Dialogs.WikiPagesDialog = function(dialogId, formdata, callbackOnClose) {
 		var that = {};
 
 		that.dialog = null;
 		that.dialogId = dialogId;
+		that.formdata = formdata;
 		that.callbackOnClose = callbackOnClose;
 
 		/**
@@ -23,6 +24,8 @@
 		that.initialize = function() {
 
 			that.addButtonListeners();
+			$('#tabs').tabs();
+			that.presetInputs();
 			
 			$( "#richtext-edit-links input#wiki-pages-search-field" ).autocomplete({
 		        source: function( request, response ) {
@@ -39,18 +42,39 @@
 		            	  
 		              },
 		              success: function( data ) {
-		                response( $.map(data.sfautocomplete, function(obj,i) { 
+		                response( $.map(data.pfautocomplete, function(obj,i) { 
 		                	return { label : obj.title, value: obj.title, data: { id: obj.id, ns: obj.ns, fullTitle: obj.data.fullTitle, category: obj.data.category } };
 		                }));
 		              }
 		            });
 		          },
 	              select: function( event, ui ) {
-	                  that.selectedItem = ui.item.data;
+	                  $('input#wiki-pages-fulltitle-field').val(ui.item.data.fullTitle);
 	              }
 		    
 		      });
 		
+		};
+		
+		that.presetInputs = function() {
+			// preset dialog inputs if it is a link
+			if (that.formdata.get(0).tagName == 'A') {
+        		// edit link
+				if (that.formdata.hasClass('external')) {
+					$('input#wiki-pages-url-field').val(that.formdata.attr('href'));
+					$('input#wiki-pages-label-field').val(that.formdata.html());
+					$( "#tabs" ).tabs({ active: 1 });
+				} else {
+					$('input#wiki-pages-search-field').val(that.formdata.attr('title'));
+					$('input#wiki-pages-fulltitle-field').val(that.formdata.attr('href'));
+					$( "#tabs" ).tabs({ active: 0 });
+				}
+        	} else {
+        		$('input#wiki-pages-url-field').val('');
+				$('input#wiki-pages-label-field').val('');
+				$('input#wiki-pages-search-field').val('');
+				$( "#tabs" ).tabs({ active: 0 });
+        	}
 		};
 		
 		
@@ -65,10 +89,27 @@
 					function(event) {
 						var action = $(event.target).attr("action");
 						if (action == "add-link") {
-							if (that.callbackOnClose) {
-								var title = $( "#richtext-edit-links input#wiki-pages-search-field" ).val();
-								that.callbackOnClose(title, that.selectedItem.fullTitle);
+							
+							var selectedTab = $("#tabs").tabs('option', 'active');
+							switch(selectedTab) {
+							case 0: 
+								// insert File link
+								if (that.callbackOnClose) {
+									var title = $( "#richtext-edit-links input#wiki-pages-search-field" ).val();
+									var fullTitle = $( "#richtext-edit-links input#wiki-pages-fulltitle-field" ).val();
+									that.callbackOnClose(selectedTab, { title: title, fullTitle: fullTitle });
+								}
+								break;
+							case 1:
+								// insert external link
+								if (that.callbackOnClose) {
+									var url = $( "#richtext-edit-links input#wiki-pages-url-field" ).val();
+									var label = $( "#richtext-edit-links input#wiki-pages-label-field" ).val();
+									that.callbackOnClose(selectedTab, { url: url, label : label });
+								}
+								break;
 							}
+							
 							that.dialog.modal('hide');
 						}
 					});
@@ -115,7 +156,7 @@
 					"show" : true
 
 				});
-
+				that.presetInputs();
 			}
 
 			return that.dialog;

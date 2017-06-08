@@ -63,7 +63,10 @@ $wgResourceModules['ext.semanticformsinputs.richtext'] = array(
 				'libs/richtext.js',
 				'libs/wikipages_dialog.js',
 		),
-		'styles' => ['skins/richtext.css', 'libs/fancytree/skin-win8/ui.fancytree.min.css' ],
+		'styles' => ['skins/richtext.css',
+					 'libs/fancytree/skin-win8/ui.fancytree.min.css',
+					 'skins/jquery-ui-1.9.2.custom.min.css' 
+		],
 		'dependencies' => ['jquery.tablesorter', 'ext.pageforms.main', 'ext.bootstrap.styles', 'ext.bootstrap.scripts' ]
 );
 

@@ -5,7 +5,7 @@
 		position: relative;
     }
     .modal-dialog-wikipages {
-		width: 400px; /* New width for default modal */
+		width: 700px; /* New width for default modal */
     	margin: 30px auto;
 		position: relative;
     }
@@ -66,7 +66,7 @@
     margin-bottom: 10px;
 }
 
-.modal-dialog-wikipages input#wiki-pages-search-field {
+.modal-dialog-wikipages input.wiki-pages-input-field {
     width: 100%;
     margin-bottom: 10px;
 }
@@ -141,4 +141,10 @@
 
 span.fancytree-icon {
 	background: url("category.png") !important;
+}
+
+input.ui-autocomplete-loading {
+	background-image: url("/mediawiki/extensions/Richtext/skins/ajax-loader.gif?2a669");
+    background-size: 16px 16px;
+    background-repeat: no-repeat;
 }
