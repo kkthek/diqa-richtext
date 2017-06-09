@@ -102,10 +102,6 @@
 				
 				if (event.keyCode == 13) {
 					var substr = $(event.target).val();
-					if (substr.length < 3) {
-						alert("Bitte mind. 3 Zeichen eingeben.");
-						return;
-					}
 					
 					that.search(substr);
 				}
@@ -294,7 +290,7 @@
 					"show" : true
 
 				});
-
+				$('input.richtext-image-result', that.dialog).val('');
 			}
 
 			return that.dialog;

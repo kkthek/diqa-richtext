@@ -167,6 +167,19 @@ function SFI_RICHTEXT_init(inputID, attribs) {
 								$("#wpSaveAndContinue").addClass('sf-save_and_continue-changed');
 								$("#wpSaveAndContinue").removeAttr("disabled");
 					        });
+							editor.on('keydown', function(event) {
+								var node = $(editor.selection.getNode());
+								if (event.which == 13 && node.hasClass('diqa-richtext')) {
+									var anchorOffset = editor.selection.getSel().anchorOffset;
+									var anchorTextLength = $(editor.selection.getNode()).text().length;
+									if (anchorOffset > 0 && anchorOffset != anchorTextLength) {
+										event.preventDefault();
+									    event.stopPropagation();
+									    return false;
+									}
+								}
+								
+					        });
 							editor.on('setcontent', function(args) {
 								//alert('setcontent occured');
 								$("#wpSaveAndContinue").addClass('sf-save_and_continue-changed');

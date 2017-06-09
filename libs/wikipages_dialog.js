@@ -105,6 +105,16 @@
 								if (that.callbackOnClose) {
 									var url = $( "#richtext-edit-links input#wiki-pages-url-field" ).val();
 									var label = $( "#richtext-edit-links input#wiki-pages-label-field" ).val();
+									
+									// if no label given than use URL instead
+									if (label == '') {
+										label = url;
+									}
+									// check if schema is present add add HTTP if not
+									if (url.toLowerCase().match(/^[a-z]+:\/\//) == null) {
+										url = 'http://' + url;
+									}
+											
 									that.callbackOnClose(selectedTab, { url: url, label : label });
 								}
 								break;
