@@ -29,6 +29,7 @@ global $wgExtensionCredits;
 global $wgExtensionMessagesFiles;
 global $wgHooks;
 global $wgResourceModules;
+global $wgExtensionFunctions;
 
 // register extension
 $wgExtensionCredits[ 'diqa' ][] = array(
@@ -45,6 +46,7 @@ $dir = dirname( __FILE__ );
 
 $wgExtensionMessagesFiles['DIQArichtext'] = $dir . '/DIQArichtext.i18n.php';
 $wgHooks['ParserFirstCallInit'][] = 'wfDIQArichtextSetup';
+$wgExtensionFunctions[] = 'wfDIQArichtextExtension';
 
 $wgResourceModules['ext.semanticformsinputs.richtext'] = array(
 		'localBasePath' => $dir,
@@ -54,8 +56,8 @@ $wgResourceModules['ext.semanticformsinputs.richtext'] = array(
 				'libs/jquery-ui/jquery-ui-1.9.2.custom.min.js',
 				'libs/fancytree/jquery.fancytree-all.js',
 				'libs/bootbox.min.js',
-				'libs/tinymce-4.4.0/jquery.tinymce.min.js',
-				'libs/tinymce-4.4.0/tinymce.min.js',
+				'libs/tinymce-4.6.4/jquery.tinymce.min.js',
+				'libs/tinymce-4.6.4/tinymce.min.js',
 				'libs/image_ajax.js',
 				'libs/image_dialog.js',
 				'libs/image_multidialog.js',
@@ -81,6 +83,20 @@ function wfDIQArichtextSetup() {
 
     $wgPageFormsFormPrinter->registerInputType( 'DIQA\Richtext\SFIRichtext' );
     $wgPageFormsFormPrinter->registerInputType( 'DIQA\Richtext\SFIRichtextWithImage' );
+    
+	return true;
+}
 
+function wfDIQArichtextExtension() {
+	global $wgSpecialPages;
+	$wgSpecialPages['Upload'] = array('DIQA\Richtext\SpecialUploadRichtext');
+	
+	global $wgRequest, $wgOut;
+	if (!is_null($wgRequest->getVal('usedInIframe'))) {
+		$wgOut->addInlineStyle('#mw-navigation {
+			    display: none !important;
+			}');
+	}
+	
 	return true;
 }

@@ -15,7 +15,7 @@
 function SFI_RICHTEXT_init(inputID, attribs) {
 		
 	// initialize richtext editor
-	var basePath = wgScriptPath + '/extensions/Richtext/libs/tinymce-4.4.0/';
+	var basePath = wgScriptPath + '/extensions/Richtext/libs/tinymce-4.6.4/';
 	var withimage = $('#' + inputID).attr("withimage") == "true";
 	var alignment = $('#' + inputID).attr("alignment");
 	var category = $('#' + inputID).attr("category");
@@ -79,7 +79,7 @@ function SFI_RICHTEXT_init(inputID, attribs) {
 							});
 
 							editor.on('init', function(args) {
-								$('table div.placeholder img', editor.dom.doc).click(new DIQARICHTEXT.ImageEditor(editor).editImageConfirm);
+								$('div.placeholder img', editor.dom.doc).click(new DIQARICHTEXT.ImageEditor(editor).editImageConfirm);
 					        });
 														
 							editor.addButton('addImage', {
@@ -158,13 +158,13 @@ function SFI_RICHTEXT_init(inputID, attribs) {
 
 							editor.on('init', function(args) {
 								//alert('init occured');
-								$("#wpSaveAndContinue").removeClass('sf-save_and_continue-changed');
+								$("#wpSaveAndContinue").removeClass('pf-save_and_continue-changed');
 								$("#wpSaveAndContinue").removeAttr("disabled");
 								
 					        });
 							editor.on('keyup', function(args) {
 								//alert('keyup occured');
-								$("#wpSaveAndContinue").addClass('sf-save_and_continue-changed');
+								$("#wpSaveAndContinue").addClass('pf-save_and_continue-changed');
 								$("#wpSaveAndContinue").removeAttr("disabled");
 					        });
 							editor.on('keydown', function(event) {
@@ -182,13 +182,13 @@ function SFI_RICHTEXT_init(inputID, attribs) {
 					        });
 							editor.on('setcontent', function(args) {
 								//alert('setcontent occured');
-								$("#wpSaveAndContinue").addClass('sf-save_and_continue-changed');
+								$("#wpSaveAndContinue").addClass('pf-save_and_continue-changed');
 								$("#wpSaveAndContinue").removeAttr("disabled");
 								$('a.diqa-richtext', this.getBody()).click(onEditLink);
 					        });
 							editor.on('change', function(args) {
 								//alert('change occured');
-								$("#wpSaveAndContinue").addClass('sf-save_and_continue-changed');
+								$("#wpSaveAndContinue").addClass('pf-save_and_continue-changed');
 								$("#wpSaveAndContinue").removeAttr("disabled");
 					        });
 							

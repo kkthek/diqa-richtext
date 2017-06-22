@@ -21,6 +21,7 @@
       </div>
       </div>
       <div class="modal-footer">
+      	<button type="button" action="upload-image" class="btn btn-default">{{wfMessage('diqa-richtext-upload-image')->text()}}</button>
         <button type="button" action="add-image" class="btn btn-default">{{wfMessage('diqa-richtext-add-image')->text()}}</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">{{wfMessage('diqa-richtext-cancel')->text()}}</button>
       </div>

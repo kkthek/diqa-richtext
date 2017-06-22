@@ -4,6 +4,13 @@
     	margin: 30px auto;
 		position: relative;
     }
+    
+	.modal-dialog-upload-richtext {
+        width: 1200px; /* New width for default modal */
+    	margin: 5px auto;
+		position: relative;
+    }
+    
     .modal-dialog-wikipages {
 		width: 700px; /* New width for default modal */
     	margin: 30px auto;
@@ -26,6 +33,10 @@
 
 .richtext-dialog div.modal-body {
     height: 400px;
+}
+
+.richtext-upload-dialog div.modal-body {
+    height: 600px;
 }
 
 .richtext-dialog div.richtext-preview-image {
@@ -129,7 +140,7 @@
 
 .globalSpinner{
     position:fixed;
-    z-index:1000;/* make higher than whatever is on the page */
+    z-index:10000;/* make higher than whatever is on the page */
     top:0;
     left:0;
     right:0;

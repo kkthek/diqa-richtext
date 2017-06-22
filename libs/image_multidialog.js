@@ -71,7 +71,9 @@
     				$('input.richtext-image-result', that.dialog).val(selectedSignatures == '' ? signature :  selectedSignatures + ", " + signature);
     			});
 				
-		
+				$('button[action=upload-image]').click(function(event) {
+					that.openUploadDialog();
+				});
 			}
 			
 			

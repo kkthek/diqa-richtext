@@ -20,5 +20,7 @@ $messages ['de'] = array (
 		'diqa-richtext-add-image' => 'Füge Bild hinzu',
 		'diqa-richtext-add-category' => 'Füge Kategorie hinzu',
 		'diqa-richtext-cancel' => 'Abbrechen',
+		'diqa-richtext-upload-image' => 'Bild hochladen',
+		'diqa-richtext-close' => 'Schließen',
 );
 

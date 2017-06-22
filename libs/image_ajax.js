@@ -55,6 +55,35 @@
 
 		};
 		
+		that.getUploadDialog = function(callback, callbackError) {
+
+			var ajaxIndicator = new DIQARICHTEXT.Util.AjaxIndicator();
+			ajaxIndicator.setGlobalLoading(true);
+			
+			var data = {
+				action : 'diqarichtext',
+				'method' : 'getUploadDialog',
+				format : 'json'
+			};
+
+			$.ajax({
+				type : "GET",
+				url : mw.util.wikiScript('api'),
+				data : data,
+				dataType : 'json',
+				success : function(jsondata) {
+					ajaxIndicator.setGlobalLoading(false);
+					callback(jsondata);
+
+				},
+				error : function(jsondata) {
+					ajaxIndicator.setGlobalLoading(false);
+					callbackError(jsondata);
+				}
+			});
+
+		};
+		
 		
 		that.getWikiPagesDialog = function(id, callback, callbackError) {
 

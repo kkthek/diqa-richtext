@@ -32,6 +32,9 @@ class RichtextAjaxAPI extends ApiBase {
 			case 'getDialog' :
 				$this->getDialog ( $params );
 				break;
+			case 'getUploadDialog' :
+				$this->getUploadDialog ( $params );
+				break;
 			case 'findImages' :
 				$this->findImages ( $params );
 				break;
@@ -117,6 +120,23 @@ class RichtextAjaxAPI extends ApiBase {
 		
 		$result->addValue ( null, $this->getModuleName (), $formattedData );
 	}
+	
+	private function getUploadDialog(array $params) {
+		
+		global $wgScriptPath;
+		
+		$html = $this->blade->view ()->make ( "dialogs.upload-image", array (
+				
+				'id' => 'richtext-upload-dialog',
+				'wgScriptPath' => $wgScriptPath,
+	
+		) )->render ();
+		$formattedData = new \stdClass ();
+		$formattedData->html = $html;
+		$result = $this->getResult ();
+	
+		$result->addValue ( null, $this->getModuleName (), $formattedData );
+	}
 
 	private function findImages(array $params) {
 		$imageInterface = ImageInterfaceImpl::getInstance();
@@ -137,7 +157,7 @@ class RichtextAjaxAPI extends ApiBase {
 		$file = $imageInterface->getThumbnail ( $params ['signature'] );
 
 		$thumbnails = $file->getThumbnails();
-		$html = $file->getThumbUrl(self::getPreferredThumbnail($thumbnails, ['320px', '180px', '800px']));
+		$html = $file->getThumbUrl(self::getPreferredThumbnail($thumbnails, ['320px', '180px', '800px', '120px']));
 		$ext = $file->getExtension();
 		$formattedData = new \stdClass ();
 		$formattedData->html = $html;

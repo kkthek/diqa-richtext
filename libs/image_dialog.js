@@ -75,6 +75,10 @@
     				var signature = targetRow.attr('signature');
     				$('input.richtext-image-result', that.dialog).val(signature);
     		});
+			
+			$('button[action=upload-image]').click(function(event) {
+				that.openUploadDialog();
+			});
 		};
     
 		that.search = function(substr) {
@@ -110,10 +114,6 @@
 			
 			$("input#richtext-image-search", that.dialog).click(function() { 
 				var substr = $("input.richtext-search-field").val();
-				if (substr.length < 3) {
-					alert("Bitte mind. 3 Zeichen eingeben.");
-					return;
-				}
 				
 				that.search(substr);
 			});
@@ -224,16 +224,48 @@
 				}
 			}
 		};
+		
+		that.openUploadDialog = function() {
+			
+			$('#richtext-upload-dialog').remove();
+			// request dialog, then open
+			new window.DIQARICHTEXT.Ajax().getUploadDialog(function(jsondata) {
+				
+					var html = jsondata.diqarichtext.html;
+					$('body').append($(html));
+					
+					$('#richtext-upload-dialog').modal({
+						"backdrop" : "static",
+						"keyboard" : true,
+						"show" : true,
+						
+					}).on('hide.bs.modal', function (e) {
+						var filename = $("iframe").contents().find("div.fullMedia a").attr('title');
+						$('input.richtext-image-result', that.dialog).val(filename);
+					});
+					
+					
+				},  function(jsondata){
+					console.log(jsondata);
+				});
+
+			
+
+			
+		
+		};
 
 		/**
 		 * Opens the dialog
 		 */
 		that.openDialog = function() {
 			
-			if ($('#'+that.dialogId).length == 0) {
+			// remove old dialog
+			$('#'+that.dialogId).remove();
 				
-				// first opening: request dialog, then open
-				new window.DIQARICHTEXT.Ajax().getDialog(that.dialogId, '', that.wikipage, that.signature, function(jsondata) {
+			// request dialog, then open
+			new window.DIQARICHTEXT.Ajax().getDialog(that.dialogId, '', that.wikipage, that.signature, function(jsondata) {
+				
 					var html = jsondata.diqarichtext.html;
 					$('body').append($(html));
 					
@@ -272,26 +304,17 @@
 							}
 							
 							
-						}, function() {
+						}, function(jsondata) {
 							that.setImagePreviewLoading(false);
-							
+							console.log(jsondata);
 						});
 					}
 					
 				},  function(jsondata){
+					console.log(jsondata);
 				});
 
-			} else {
-				
-				// just re-open already loaded dialog
-				that.dialog = $('#'+that.dialogId).modal({
-					"backdrop" : "static",
-					"keyboard" : true,
-					"show" : true
-
-				});
-				$('input.richtext-image-result', that.dialog).val('');
-			}
+			
 
 			return that.dialog;
 		};
