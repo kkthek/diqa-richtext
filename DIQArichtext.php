@@ -72,6 +72,13 @@ $wgResourceModules['ext.semanticformsinputs.richtext'] = array(
 		'dependencies' => ['jquery.tablesorter', 'ext.pageforms.main', 'ext.bootstrap.styles', 'ext.bootstrap.scripts' ]
 );
 
+$wgResourceModules['ext.semanticformsinputs.richtext.upload'] = array(
+		'localBasePath' => $dir,
+		'remoteExtPath' => 'Richtext',
+		'scripts' => [],
+		'styles' => ['skins/upload-dialog.css'],
+		'dependencies' => []
+);
 
 $GLOBALS['wgAPIModules']['diqarichtext'] = 'DIQA\Richtext\RichtextAjaxAPI';
 
@@ -97,6 +104,22 @@ function wfDIQArichtextExtension() {
 			    display: none !important;
 			}');
 	}
+	
+	$script = "";
+	$script .= "\nvar DIQA = DIQA || {};";
+	$script .= "\nDIQA.RICHTEXT = DIQA.RICHTEXT || {};";
+	
+	global $wgDIQARichtextLinkPickerCategory;
+	if (isset($wgDIQARichtextLinkPickerCategory)) {
+		$script .= "\nDIQA.RICHTEXT.linkPickerCategory = '".implode(',', $wgDIQARichtextLinkPickerCategory)."';";
+	}
+	global $wgDIQARichtextShowFiletypesInOverlay;
+	if (isset($wgDIQARichtextShowFiletypesInOverlay)) {
+		$script .= "\nDIQA.RICHTEXT.showFiletypesInOverlay = '".implode(',', $wgDIQARichtextShowFiletypesInOverlay)."';";
+	}
+	$wgOut->addScript(
+			'<script type="text/javascript">'.$script.'</script>'
+	);
 	
 	return true;
 }

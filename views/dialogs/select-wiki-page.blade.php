@@ -18,6 +18,8 @@
 		  <div id="tabs-1">
 		     <div>{{wfMessage('diqa-richtext-wikipage')->text()}}: <input type="text" id="wiki-pages-search-field" class="wiki-pages-input-field"/></div>
 		     <input type="hidden" id="wiki-pages-fulltitle-field"/>
+		     <input type="hidden" id="wiki-pages-file-extension-field"/>
+		     <input type="hidden" id="wiki-pages-type-field"/>
 		  </div>
 		  <div id="tabs-2">
 		     <div>{{wfMessage('diqa-richtext-url')->text()}}: <input type="text" id="wiki-pages-url-field" class="wiki-pages-input-field"/></div>

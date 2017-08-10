@@ -10,10 +10,10 @@
       </div>
       <div class="modal-body">
        <div>Suche: <input type="text" class="richtext-search-field"/><input type="button" value="Suchen" id="richtext-image-search" /></div>
-       <div class="richtext-preview-image"></div>
        <div class="richtext-image-list">
       	@include('dialogs.select-image-list', array('rows' => $rows))
        </div>
+       <div class="richtext-preview-image"></div>
       </div>
       <div>
       <div><input class="add-to-basket" type="button" value="Übernehmen > " /></div>

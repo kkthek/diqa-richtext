@@ -1,0 +1,16 @@
+div#uploadtext {
+	display: none;
+}
+
+table#mw-htmlform-description tr:nth-child(2),
+table#mw-htmlform-description tr:nth-child(4) {
+	display: none;
+}
+
+p.mw-upload-editlicenses {
+	display: none;
+}
+
+ul#footer-icons {
+	display: none;
+}

@@ -13,6 +13,16 @@ class SpecialUploadRichtext extends \SpecialUpload {
 		parent::__construct( 'Upload', 'upload' );
 	}
 	
+	public function setHeaders() {
+		parent::setHeaders();
+		if (!is_null($this->getRequest()->getVal('usedInIframe'))) {
+			$out = $this->getOutput();
+			$out->addModuleStyles( [
+					'ext.semanticformsinputs.richtext.upload',
+					] );
+		}
+	}
+	
 	protected function getUploadForm( $message = '', $sessionKey = '', $hideIgnoreWarning = false ) {
 		$form = parent::getUploadForm($message, $sessionKey, $hideIgnoreWarning);
 		if (!is_null($this->getRequest()->getVal('usedInIframe'))) {

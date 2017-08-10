@@ -19,7 +19,7 @@ function SFI_RICHTEXT_init(inputID, attribs) {
 	var withimage = $('#' + inputID).attr("withimage") == "true";
 	var alignment = $('#' + inputID).attr("alignment");
 	var category = $('#' + inputID).attr("category");
-	var menu = withimage ? 'undo redo | bold italic underline strikethrough | bullist numlist indent outdent | table addImage addLink addCategory | fullscreen' 
+	var menu = withimage ? 'undo redo | bold italic underline strikethrough | bullist numlist indent outdent | table addImage addLink | fullscreen' 
 			: 'undo redo | bold italic underline strikethrough | bullist numlist indent outdent fullscreen';
 	var ed = $('#' + inputID)
 			.tinymce(
@@ -36,7 +36,9 @@ function SFI_RICHTEXT_init(inputID, attribs) {
 							"table" : basePath
 									+ 'plugins/table/plugin.min.js',
 							"paste" : basePath
-									+ 'plugins/paste/plugin.min.js'
+									+ 'plugins/paste/plugin.min.js',
+							"lists" : basePath
+									+ 'plugins/lists/plugin.min.js'
 
 						},
 						menu : {
@@ -109,11 +111,26 @@ function SFI_RICHTEXT_init(inputID, attribs) {
 				            		var anchor = null;
 				            		switch(selectedTab) {
 				            		case 0:
-				            			anchor = $('<a href="'+data.fullTitle+'" title="'+data.title+'" class="diqa-richtext">'+data.title+'</a>');
 				            			
+				            			if (data.type == 'file' && DIQA.RICHTEXT.showFiletypesInOverlay.indexOf(data.fileExtension) > -1) {
+				            				// file-types displayed in overlay
+				            				anchor = $('<a href="'+data.fullTitle+'" title="'+data.title+'" class="diqa-richtext imageOverlay file"'
+				            						+' fileExtension="'+data.fileExtension+'">'+data.title+'</a>');
+				            			} else if (data.type == 'file') {
+				            				// file-types display as download link
+				            				anchor = $('<a href="'+data.fullTitle+'" title="'+data.title+'" class="diqa-richtext file"'
+				            						+' fileExtension="'+data.fileExtension+'">'+data.title+'</a>');
+				            			} else {
+				            				// wiki pages
+					            			var wgScriptPath = mw.config.get('wgScriptPath');
+					            			anchor = $('<a href="'+wgScriptPath+"/index.php/"
+					            					+data.fullTitle+'" title="'+data.title+'" class="diqa-richtext">'+data.title+'</a>');
+				            			}
 				            			break;
+				            			
 				            		case 1:
-				            			anchor = $('<a target="_blank" rel="nofollow noreferrer noopener" class="external text diqa-richtext" href="'+data.url+'">'+data.label+'</a>');
+				            			anchor = $('<a target="_blank" rel="nofollow noreferrer noopener" class="external text diqa-richtext" href="'
+				            					+data.url+'">'+data.label+'</a>');
 				            		
 				            			break;
 				            		}
