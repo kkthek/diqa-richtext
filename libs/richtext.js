@@ -81,16 +81,16 @@ function SFI_RICHTEXT_init(inputID, attribs) {
 							});
 
 							editor.on('init', function(args) {
-								$('div.placeholder img', editor.dom.doc).click(new DIQARICHTEXT.ImageEditor(editor).editImageConfirm);
+								//$('div.placeholder img', editor.dom.doc).click(new DIQARICHTEXT.ImageEditor(editor).editImageConfirm);
 					        });
 														
 							editor.addButton('addImage', {
-						            title : 'Add image',
+						            title : mw.msg('diqa-richtext-add-image'),
 						            image : basePath + 'skins/lightgray/img/object.gif',
 						            onclick : function(event) {
 						            	
 						            	var selectionNode = $(editor.selection.getNode());
-						            	if (selectionNode.prop("tagName").toLowerCase() == 'td' || selectionNode.hasClass('placeholder')) {
+						            	if (selectionNode.prop("tagName").toLowerCase() == 'img') {
 						            		event.target = selectionNode;
 						            		new DIQARICHTEXT.ImageEditor(editor).editImageDialog(event, category);
 						            	} else {
@@ -151,7 +151,7 @@ function SFI_RICHTEXT_init(inputID, attribs) {
 				            };
 				            
 							editor.addButton('addLink', {
-					            title : 'Add link',
+					            title : mw.msg('diqa-richtext-add-link'),
 					            image : basePath + 'skins/lightgray/img/anchor.gif',
 					            onclick : onEditLink
 					        });

@@ -72,12 +72,28 @@ $wgResourceModules['ext.semanticformsinputs.richtext'] = array(
 		'dependencies' => ['jquery.tablesorter', 'ext.pageforms.main', 'ext.bootstrap.styles', 'ext.bootstrap.scripts' ]
 );
 
+
+$wgResourceModules['ext.semanticformsinputs.richtext.lang'] = array(
+		'localBasePath' => $dir,
+		'remoteExtPath' => 'Richtext',
+		'scripts' => [],
+		'styles' => [],
+		'dependencies' => [],
+		'messages' => array(
+				'diqa-richtext-add-image',
+				'diqa-richtext-add-link',
+		
+		
+		),
+);
+
 $wgResourceModules['ext.semanticformsinputs.richtext.upload'] = array(
 		'localBasePath' => $dir,
 		'remoteExtPath' => 'Richtext',
 		'scripts' => [],
 		'styles' => ['skins/upload-dialog.css'],
-		'dependencies' => []
+		'dependencies' => [],
+		
 );
 
 $GLOBALS['wgAPIModules']['diqarichtext'] = 'DIQA\Richtext\RichtextAjaxAPI';
@@ -91,6 +107,8 @@ function wfDIQArichtextSetup() {
     $wgPageFormsFormPrinter->registerInputType( 'DIQA\Richtext\SFIRichtext' );
     $wgPageFormsFormPrinter->registerInputType( 'DIQA\Richtext\SFIRichtextWithImage' );
     
+    global $wgOut;
+    $wgOut->addModules('ext.semanticformsinputs.richtext.lang');
 	return true;
 }
 

@@ -81,8 +81,8 @@
 				cell.empty();
 				cell.html(jsondata.diqarichtext.html);
         		
-        		$('div.placeholder img', that.editor.dom.doc).off("click");
-        		$('div.placeholder img', that.editor.dom.doc).click(new DIQARICHTEXT.ImageEditor(that.editor).editImageConfirm);
+//        		$('div.placeholder img', that.editor.dom.doc).off("click");
+//        		$('div.placeholder img', that.editor.dom.doc).click(new DIQARICHTEXT.ImageEditor(that.editor).editImageConfirm);
         	});
         	richtextDialog.openDialog();
         	
@@ -95,8 +95,8 @@
         	var richtextDialog = new DIQARICHTEXT.Dialogs.RichtextDialogMultiSelect('richtext-add-images', '', alignment, category, function(jsondata) {
         		that.editor.focus();
         		that.editor.selection.setContent(jsondata.diqarichtext.html);
-        		$('div.placeholder img', that.editor.dom.doc).off("click");
-        		$('div.placeholder img', that.editor.dom.doc).click(new DIQARICHTEXT.ImageEditor(that.editor).editImageConfirm);
+//        		$('div.placeholder img', that.editor.dom.doc).off("click");
+//        		$('div.placeholder img', that.editor.dom.doc).click(new DIQARICHTEXT.ImageEditor(that.editor).editImageConfirm);
         	});
         	richtextDialog.setImagePreviewLoading(false);
         	richtextDialog.openDialog();
