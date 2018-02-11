@@ -13,7 +13,7 @@
  *            config attributes
  */
 function SFI_RICHTEXT_init(inputID, attribs) {
-		
+	$(function() { 	
 	// initialize richtext editor
 	var basePath = wgScriptPath + '/extensions/Richtext/libs/tinymce-4.6.4/';
 	var withimage = $('#' + inputID).attr("withimage") == "true";
@@ -75,7 +75,8 @@ function SFI_RICHTEXT_init(inputID, attribs) {
 						remove_script_host : true,
 
 						setup : function(editor) {
-
+							window.currentEditors = window.currentEditors || [];
+							window.currentEditors.push(editor);
 							editor.on('FullscreenStateChanged', function(e) {
 								$('nav').toggle();
 							});
@@ -218,6 +219,6 @@ function SFI_RICHTEXT_init(inputID, attribs) {
 	
 	
 	
-
+	});
 
 }
